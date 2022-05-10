@@ -1,6 +1,19 @@
 # Obatin-API
 Backend source code for Obatin App
 
+## Project structure 
+
+* **src**
+  * **api**
+  * **exceptions**
+  * **services**
+  * **validator**
+  * server.js (function that start hapi server)
+* README.md
+* .env (environment file)
+
+## How to usage
+
 Usage: 
 1) Clone this repo
 ```
@@ -23,4 +36,4 @@ $ npm run start
 ```
 
 5) View the API docs at
-[http://localhost:500/](http://localhost:5000/)
+[http://localhost:5000/](http://localhost:5000/)
