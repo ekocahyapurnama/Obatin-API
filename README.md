@@ -37,8 +37,9 @@ $ npm run start
 
 5) View the API docs at
 [http://localhost:5000/](http://localhost:5000/)
+
 &nbsp;
-&nbsp;
+
 **Use sample bot :**
 
 1) Go to bot_mockup directory
@@ -55,6 +56,7 @@ $ npm install
 ```
 $ npm run train
 ```
+
 4) Now let's talk to our new friend
 ```
 $ npm run start train
