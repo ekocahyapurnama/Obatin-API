@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon ./src/server.js"
   },
-  "author": "obatin teams",
+  "author": "obatin team",
   "license": "ISC",
   "dependencies": {
     "@hapi/hapi": "^20.2.2",

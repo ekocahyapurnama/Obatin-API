@@ -24,32 +24,33 @@ const Hapi = require('@hapi/hapi');
     {
       method: 'POST',
       path: '/users',
-      handler: async (request, h) => ' POST /users',
+      handler: async (request, h) => 'POST /users',
     },
     // route auth
     {
       method: 'POST', // menambahkan token di database
       path: '/auth',
-      handler: async (request, h) => 'Welcome to Obatin API!',
+      handler: async (request, h) => 'POST /auth',
     },
     {
       method: 'PUT', // mengedit token yang ada di database
       path: '/auth',
-      handler: async (request, h) => 'Welcome to Obatin API!',
+      handler: async (request, h) => 'PUT /auth',
     },
     {
       method: 'DELETE',
-      path: '/auth', // mengahpus token yang ada di ddatabase
-      handler: async (request, h) => 'Welcome to Obatin API!',
+      path: '/auth', // mengahpus token yang ada di database
+      handler: async (request, h) => 'DELETE /auth',
     },
-    // route talk to bot
+    // route talk
     {
       method: 'POST',
-      path: '/talk',
-      handler: async (request, h) => 'Welcome to Obatin API!',
+      path: '/talk', // untuk berinteraksi dengan bot
+      handler: async (request, h) => 'POST /talk',
     },
   ]);
 
   // Server dimulai
+  console.log(`server running on ${server.info.uri}`);
   await server.start();
 })();
