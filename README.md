@@ -12,7 +12,7 @@ Backend source code for Obatin App
 * README.md
 * .env (environment file)
 
-## How to usage
+## How to
 
 Usage: 
 1) Clone this repo
