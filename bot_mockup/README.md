@@ -1,5 +1,5 @@
 # Bot_mockup
-Examples bot that will be used for this app.
+Examples bot that will be used for chat mockup.
 This tutorial can be found [here](https://medium.com/geekculture/create-chatbot-with-nodejs-cf3d8bc3f302)
 
 
