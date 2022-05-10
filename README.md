@@ -37,8 +37,8 @@ $ npm run start
 
 5) View the API docs at
 [http://localhost:5000/](http://localhost:5000/)
-&nbsp
-&nbsp
+&nbsp;
+&nbsp;
 **Use sample bot :**
 
 1) Go to bot_mockup directory
