@@ -4,7 +4,7 @@ Backend source code for Obatin App
 &nbsp;
 
 ### TODO
-- [ ] Define path endpoint
+- [x] Define path endpoint
   - [x] talk
   - [x] users
   - [x] authentications
