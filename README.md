@@ -1,13 +1,46 @@
 # Obatin-API
 Backend source code for Obatin App
 
+&nbsp;
+
+### TODO
+- [ ] Define path endpoint
+  - [x] talk
+  - [x] users
+  - [x] authentications
+- [ ] Handling error
+  - [ ] client error
+  - [ ] invariant error
+  - [ ] not found error
+- [ ] API
+  - [ ] Integrate bot_mockup
+    - [ ] create service
+    - [ ] request validation
+    - [ ] create handler (handling request response)
+    - [ ] swagger documentation
+
+&nbsp;
+
+**NOTE** : the todo list is still temporary
 ## Project structure 
 
 * **src**
-  * **api**
-  * **exceptions**
-  * **services**
-  * **validator**
+  * **api** (this folder like controller folder)
+    * **authentications**
+      * handler.js
+      * index.js
+      * routes.js
+    * **talk**
+      * handler.js
+      * index.js
+      * routes.js
+    * **users**
+      * handler.js
+      * index.js
+      * routes.js
+  * **exceptions** (for handling error exceptions)
+  * **services** (business logic here)
+  * **validator** (for user validation users input, validation use JOI)
   * server.js (function that start hapi server)
 * README.md
 * .env (environment file)
