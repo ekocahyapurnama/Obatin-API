@@ -26,21 +26,15 @@ Backend source code for Obatin App
 
 * **src**
   * **api** (this folder like controller folder)
-    * **authentications**
-      * handler.js
-      * index.js
-      * routes.js
     * **talk**
       * handler.js
       * index.js
       * routes.js
+    * **authentications**
     * **users**
-      * handler.js
-      * index.js
-      * routes.js
   * **exceptions** (for handling error exceptions)
   * **services** (business logic here)
-  * **validator** (for user validation users input, validation use JOI)
+  * **validator** (for validation user input, validation use JOI)
   * server.js (function that start hapi server)
 * README.md
 * .env (environment file)
