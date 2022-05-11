@@ -13,7 +13,7 @@ Backend source code for Obatin App
   - [ ] invariant error
   - [ ] not found error
 - [ ] API
-  - [ ] Integrate bot_mockup
+  - [ ] Integrate with bot_mockup
     - [ ] create service
     - [ ] request validation
     - [ ] create handler
