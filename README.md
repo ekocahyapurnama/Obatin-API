@@ -16,7 +16,7 @@ Backend source code for Obatin App
   - [ ] Integrate bot_mockup
     - [ ] create service
     - [ ] request validation
-    - [ ] create handler (handling request response)
+    - [ ] create handler
     - [ ] swagger documentation
 
 &nbsp;
