@@ -8,10 +8,10 @@ Backend source code for Obatin App
   - [x] talk
   - [x] users
   - [x] authentications
-- [ ] Handling error
-  - [ ] client error
-  - [ ] invariant error
-  - [ ] not found error
+- [x] Handling error
+  - [x] client error
+  - [x] invariant error
+  - [x] not found error
 - [ ] API
   - [ ] Integrate with bot_mockup
     - [ ] create service
