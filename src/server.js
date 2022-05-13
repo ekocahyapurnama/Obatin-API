@@ -1,7 +1,30 @@
 const Hapi = require('@hapi/hapi');
 
+// plugin untuk memuat swagger, Inert dan vision digunakan untuk memuat ui
+const Inert = require('@hapi/inert');
+const Vision = require('@hapi/vision');
+const HapiSwagger = require('hapi-swagger');
+
+// memuat custom exceptions
+const NotFoundError = require('./exceptions/NotFoundError');
+const ClientError = require('./exceptions/ClientError');
+
+// Deskripsi swagger
+const swaggerOption = require('./swaggeroption');
+
+// memuat plugin talk, memanggil class service NlpService, dan validator
+const talk = require('./api/talk');
+const NlpService = require('./services/nlp/NlpService');
+const TalkValidator = require('./validator/talk');
+
+// Direktori model
+const botDir = `${__dirname}/bot`;
+
 (async () => {
-  // KOnfigurasi server
+  // membuat instance dari Class NlpService dengan parameter direktori model (botDir)
+  const nlpService = new NlpService(botDir);
+
+  // Konfigurasi server
   const server = Hapi.server({
     host: process.env.HOST || 'localhost', // host, prod 0.0.0.0 set ke env
     port: process.env.PORT || 5000, // port
@@ -12,41 +35,50 @@ const Hapi = require('@hapi/hapi');
     },
   });
 
-  // Menambahkan route / dengan method GET
-  await server.route([
-    // route root
+  // menambahkan extension sebelum server meresponse
+  server.ext('onPreResponse', (request, h) => {
+    const { response } = request;
+
+    // jika response menidikasikan ClientError
+    if (response instanceof ClientError) {
+      // jika response adalah NotFoundError
+      if (response instanceof NotFoundError) {
+        return h.response({
+          status: 'Not Found',
+          message: response.message,
+        }).code(response.statusCode); // 404
+      }
+
+      // response dengan statusCode 400
+      return h.response({
+        status: 'Bad Request',
+        message: response.message,
+        data: {},
+      }).code(response.statusCode); // 400
+    }
+
+    // meneruskan response
+    return response.continue || response;
+  });
+
+  // Mendaftarkan plugin Inert, Vision, dan hapi-swagger
+  await server.register([
+    Inert,
+    Vision,
     {
-      method: 'GET',
-      path: '/',
-      handler: async (request, h) => 'Welcome to Obatin API!', // response ketika user masuk ke /
+      plugin: HapiSwagger,
+      options: swaggerOption,
     },
-    // route register
+  ]);
+
+  // Mendaftarkan custom plugin, yaitu talk dengan option service, dan validator
+  await server.register([
     {
-      method: 'POST',
-      path: '/users',
-      handler: async (request, h) => 'POST /users',
-    },
-    // route auth
-    {
-      method: 'POST', // menambahkan token di database
-      path: '/auth',
-      handler: async (request, h) => 'POST /auth',
-    },
-    {
-      method: 'PUT', // mengedit token yang ada di database
-      path: '/auth',
-      handler: async (request, h) => 'PUT /auth',
-    },
-    {
-      method: 'DELETE',
-      path: '/auth', // mengahpus token yang ada di database
-      handler: async (request, h) => 'DELETE /auth',
-    },
-    // route talk
-    {
-      method: 'POST',
-      path: '/talk', // untuk berinteraksi dengan bot
-      handler: async (request, h) => 'POST /talk',
+      plugin: talk,
+      options: {
+        service: nlpService,
+        validator: TalkValidator,
+      },
     },
   ]);
 
