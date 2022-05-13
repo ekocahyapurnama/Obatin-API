@@ -32,10 +32,13 @@ Backend source code for Obatin App
       * routes.js
     * **authentications**
     * **users**
+  * **bot** (for storing intents and model)
   * **exceptions** (for handling error exceptions)
   * **services** (business logic here)
+  * **utils** (This directory contains several utility programs and libraries)
   * **validator** (for validation user input, validation use JOI)
   * server.js (function that start hapi server)
+  * swaggeroptions.js (swagger options)
 * README.md
 * .env (environment file)
 
@@ -62,12 +65,12 @@ $ npm install
 $ npm run train
 ```
 
-3) Start API server
+5) Start API server
 ```
 $ npm run start
 ```
 
-5) View the API docs at
+6) View the API docs at
 [http://localhost:5000/](http://localhost:5000/)
 
 &nbsp;
