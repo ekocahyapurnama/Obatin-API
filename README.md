@@ -13,11 +13,11 @@ Backend source code for Obatin App
   - [x] invariant error
   - [x] not found error
 - [ ] API
-  - [ ] Integrate with bot_mockup
-    - [ ] create service
-    - [ ] request validation
-    - [ ] create handler
-    - [ ] swagger documentation
+  - [x] Integrate with bot_mockup
+    - [x] create service
+    - [x] request validation
+    - [x] create handler
+    - [x] swagger documentation
 
 &nbsp;
 
@@ -57,7 +57,12 @@ $ cd Obatin-API
 $ npm install
 ```
 
-4) Start API server
+4) before you start the api server, make sure you have created the model first, the dataset and the model are stored in the src/bot folder
+```
+$ npm run train
+```
+
+3) Start API server
 ```
 $ npm run start
 ```
