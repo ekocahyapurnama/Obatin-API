@@ -2,8 +2,8 @@ const Joi = require('joi');
 //
 const doc = {
   postTalkDoc: {
-    description: 'Talk to bot',
-    notes: 'This is endpoint to talking with Obatin bot. Payload only contain message field, after you fill message field, server will response back with 200 status code and data is response from bot',
+    description: 'Talk to BOT',
+    notes: 'This is endpoint where you can talk with Obatin BOT. Payload only contain message field, after you fill message field and sending request to server, server will response 200 and data field is response from BOT.',
     tags: ['api', 'talk'],
     validate: {
       payload: Joi.object({
