@@ -76,7 +76,7 @@ $ cd Obatin-API
 $ npm install
 ```
 
-4) before you start the api server, make sure you have created the model first, the dataset and the model are stored in the src/bot folder
+4) Before you start the api server, make sure you have created the model first, the dataset and the model are stored in the src/bot folder
 ```
 $ npm run train
 ```
