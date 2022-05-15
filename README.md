@@ -87,4 +87,4 @@ $ npm run start
 ```
 
 6) View the API docs at
-[http://localhost:5000/](http://localhost:5000/)
+[http://localhost:5000/doc](http://localhost:5000/doc)
