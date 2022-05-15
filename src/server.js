@@ -10,7 +10,7 @@ const NotFoundError = require('./exceptions/NotFoundError');
 const ClientError = require('./exceptions/ClientError');
 
 // Deskripsi swagger
-const swaggerOption = require('./swaggeroption');
+const swaggerOption = require('./swaggerOption');
 
 // memuat plugin talk, memanggil class service NlpService, dan validator
 const talk = require('./api/talk');
