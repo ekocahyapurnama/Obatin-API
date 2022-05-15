@@ -86,5 +86,5 @@ $ npm run train
 $ npm run start
 ```
 
-6) View the API docs at
+6) View the API documentation at
 [http://localhost:5000/doc](http://localhost:5000/doc)
