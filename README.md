@@ -1,10 +1,10 @@
 # Obatin-API
-Backend source code for Obatin App
+Obatin-API project is part of the Obatin application. This is an API build with the Hapi Js as web framework, Sequelize as ORM, and node-nlp as a BOT mockup.
 
 &nbsp;
 
 ### TODO
-- [x] Define path endpoint
+- [x] Define endpoint path
   - [x] talk
   - [x] users
   - [x] authentications
@@ -12,18 +12,35 @@ Backend source code for Obatin App
   - [x] client error
   - [x] invariant error
   - [x] not found error
+  - [ ] authentication error
 - [ ] API
   - [x] Integrate with bot_mockup
     - [x] create service
     - [x] request validation
     - [x] create handler
-    - [x] swagger documentation
+    - [x] documentation
+  - [ ] User register
+    - [ ] create service
+    - [ ] request validation
+    - [ ] create handler
+    - [ ] documentation
+  - [ ] Authentications
+    - [ ] create service
+    - [ ] request validation
+    - [ ] create handler
+    - [ ] documentation
+  
 
 &nbsp;
 
 **NOTE** : the todo list is still temporary
-## Project structure 
 
+## Features
+* Build with Hapi Js framework so that code can be easily modularized
+* API documentations with Swagger
+* Token based authentication
+
+## Project structure 
 * **src**
   * **api** (this folder like controller folder)
     * **talk**
@@ -43,7 +60,6 @@ Backend source code for Obatin App
 * .env (environment file)
 
 ## How to
-
 **Use this API:** 
 1) Clone this repo
 ```
