@@ -1,5 +1,5 @@
 # Obatin-API
-Obatin-API project is part of the Obatin application. This is an API build with the Hapi Js as web framework, Sequelize as ORM, and node-nlp as a BOT mockup.
+Obatin-API project is part of the Obatin application. This is an API build with the Hapi Js as web application framework, Sequelize as ORM, and node-nlp as a BOT mockup.
 
 &nbsp;
 
@@ -88,27 +88,3 @@ $ npm run start
 
 6) View the API docs at
 [http://localhost:5000/](http://localhost:5000/)
-
-&nbsp;
-
-**Use sample bot :**
-
-1) Go to bot_mockup directory
-```
-$ cd bot_mockup
-```
-
-2) Install the required modules
-```
-$ npm install
-```
-
-3) Start training
-```
-$ npm run train
-```
-
-4) Now let's talk to our new friend
-```
-$ npm run start train
-```
