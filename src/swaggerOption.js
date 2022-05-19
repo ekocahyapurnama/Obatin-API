@@ -15,11 +15,26 @@ const swaggerOption = {
       name: 'talk',
       description: 'This talk tag',
     },
+    {
+      name: 'authentications',
+      description: 'This authentication tag',
+    },
+    {
+      name: 'users',
+      description: 'This users tag',
+    },
   ],
   payloadType: 'json',
-  documentationPath: '/doc',
+  documentationPath: '/docs',
   schemes: ['http'],
   cors: true,
+  securityDefinitions: {
+    Bearer: {
+      type: 'Bearer',
+      name: 'Authorization',
+      in: 'header',
+    },
+  },
 };
 
 module.exports = swaggerOption;
