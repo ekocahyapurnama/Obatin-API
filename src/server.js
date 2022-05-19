@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const Hapi = require('@hapi/hapi');
 
 // plugin untuk memuat swagger, Inert dan vision digunakan untuk memuat ui
@@ -5,8 +7,9 @@ const Inert = require('@hapi/inert');
 const Vision = require('@hapi/vision');
 const HapiSwagger = require('hapi-swagger');
 
+const Jwt = require('@hapi/jwt');
+
 // memuat custom exceptions
-const NotFoundError = require('./exceptions/NotFoundError');
 const ClientError = require('./exceptions/ClientError');
 
 // Deskripsi swagger
@@ -17,12 +20,24 @@ const talk = require('./api/talk');
 const NlpService = require('./services/nlp/NlpService');
 const TalkValidator = require('./validator/talk');
 
+const users = require('./api/users');
+const UserService = require('./services/postgres/UsersService');
+const UserValidator = require('./validator/users');
+
+const authentications = require('./api/authentications');
+const AuthenticationService = require('./services/postgres/AuthenticationService');
+const TokenManager = require('./tokenize/TokenManager');
+const AuthenticationsValidator = require('./validator/authentications');
+const AuthenticationError = require('./exceptions/AuthenticationError');
+
 // Direktori model
 const botDir = `${__dirname}/bot`;
 
 (async () => {
   // membuat instance dari Class NlpService dengan parameter direktori model (botDir)
   const nlpService = new NlpService(botDir);
+  const userService = new UserService();
+  const authenticationService = new AuthenticationService();
 
   // Konfigurasi server
   const server = Hapi.server({
@@ -41,14 +56,14 @@ const botDir = `${__dirname}/bot`;
 
     // jika response menidikasikan ClientError
     if (response instanceof ClientError) {
-      // jika response adalah NotFoundError
-      if (response instanceof NotFoundError) {
+      if (response instanceof AuthenticationError) {
+        // response dengan statusCode 401
         return h.response({
-          status: 'Not Found',
+          status: 'Unauthorized',
           message: response.message,
-        }).code(response.statusCode); // 404
+          data: {},
+        }).code(response.statusCode); // 401
       }
-
       // response dengan statusCode 400
       return h.response({
         status: 'Bad Request',
@@ -69,7 +84,26 @@ const botDir = `${__dirname}/bot`;
       plugin: HapiSwagger,
       options: swaggerOption,
     },
+    {
+      plugin: Jwt,
+    },
   ]);
+
+  server.auth.strategy('obatin_api_jwt', 'jwt', {
+    keys: process.env.ACCESS_TOKEN_KEY,
+    verify: {
+      aud: false,
+      iss: false,
+      sub: false,
+      maxAgeSec: process.env.ACCESS_TOKEN_AGE,
+    },
+    validate: (artifacts) => ({
+      isValid: true,
+      credentials: {
+        id: artifacts.decoded.payload.id,
+      },
+    }),
+  });
 
   // Mendaftarkan custom plugin, yaitu talk dengan option service, dan validator
   await server.register([
@@ -78,6 +112,22 @@ const botDir = `${__dirname}/bot`;
       options: {
         service: nlpService,
         validator: TalkValidator,
+      },
+    },
+    {
+      plugin: users,
+      options: {
+        service: userService,
+        validator: UserValidator,
+      },
+    },
+    {
+      plugin: authentications,
+      options: {
+        authenticationService,
+        userService,
+        tokenManager: TokenManager,
+        validator: AuthenticationsValidator,
       },
     },
   ]);
