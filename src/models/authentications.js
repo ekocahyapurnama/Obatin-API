@@ -14,8 +14,10 @@ module.exports = (sequelize, DataTypes) => {
   authentications.init({
     token: DataTypes.TEXT,
   }, {
+    updatedAt: false,
     sequelize,
     modelName: 'authentications',
   });
+  authentications.removeAttribute('id');
   return authentications;
 };
