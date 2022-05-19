@@ -20,6 +20,7 @@ const doc = {
           },
         }),
         400: undefined,
+        401: undefined,
       },
     },
   },
