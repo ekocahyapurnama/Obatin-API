@@ -11,11 +11,6 @@ const doc = {
         username: Joi.string().trim().min(3).required(),
         password: joiPassword
           .string()
-          .minOfSpecialCharacters(1)
-          .minOfLowercase(1)
-          .minOfUppercase(2)
-          .minOfNumeric(3)
-          .noWhiteSpaces()
           .required(),
       }),
     },
