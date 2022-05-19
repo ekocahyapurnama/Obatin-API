@@ -7,8 +7,8 @@ const userPayloadSchema = Joi.object({
     .string()
     .minOfSpecialCharacters(1)
     .minOfLowercase(1)
-    .minOfUppercase(2)
-    .minOfNumeric(3)
+    .minOfUppercase(1)
+    .minOfNumeric(1)
     .noWhiteSpaces()
     .required()
     .messages({
