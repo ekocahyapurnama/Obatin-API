@@ -71,9 +71,15 @@ $ npm run train
 ```
 
 7) Start API server
-```
-$ npm run start
-```
+  * run in development
+    ```
+    $ npm run start-dev
+    ```
+  * if you run in production
+    ```
+    $ npm i -g pm2
+    $ npm run start-prod
+    ```
 
-6) View the API documentation at (if you user development environtment)
+8) View the API documentation at (if you user development environtment)
 [http://localhost:5000/docs](http://localhost:5000/docs)
