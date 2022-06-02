@@ -58,7 +58,7 @@ $ cd Obatin-API
 $ npm install
 ```
 
-4) Don't forget to set node environment, host, port, database, and token in .env file
+4) Don't forget to set host, port, and token in .env file, if you want to run this server in production set database config in .env file else if you want to run in development set database in ./src/config/config.js
 
 5) run migrate
 ```
