@@ -12,18 +12,13 @@ class MlHandler {
 
   async postPredictHandler({ payload }) {
     this._validator.validatePredictPayload(payload);
-    let response = {};
+    let response;
     try {
       response = await fetch(`${this.url}/bot?text=${payload.text}`);
       response = await response.json();
-      if (response.error) {
-        throw new Error();
-      }
     } catch (error) {
-      if (error.type === 'invalid-json') {
-        throw new Error();
-      }
       console.log(error);
+      throw new Error();
     }
     return {
       status: 'success',
@@ -39,14 +34,9 @@ class MlHandler {
     try {
       response = await fetch(`${this.url}/database?label=${payload.label}&namaobat=${payload.namaobat}`);
       response = await response.json();
-      if (response.error) {
-        throw new Error();
-      }
     } catch (error) {
-      if (error.type === 'invalid-json') {
-        throw new Error();
-      }
       console.log(error);
+      throw new Error();
     }
     return {
       status: 'success',
@@ -63,10 +53,8 @@ class MlHandler {
       response = await fetch(`${this.url}/respon?label=${payload.label}`);
       response = await response.json();
     } catch (error) {
-      if (error.type === 'invalid-json') {
-        throw new Error();
-      }
       console.log(error);
+      throw new Error();
     }
     return {
       status: 'success',

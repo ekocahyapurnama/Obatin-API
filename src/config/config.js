@@ -5,7 +5,7 @@ module.exports = {
     // database di setup disini jika pake environment 'development'
     username: 'root',
     password: '',
-    database: 'testdb',
+    database: 'mydb',
     host: '127.0.0.1',
     dialect: 'mysql',
   },
