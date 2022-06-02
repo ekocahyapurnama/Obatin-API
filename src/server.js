@@ -16,9 +16,10 @@ const ClientError = require('./exceptions/ClientError');
 const swaggerOption = require('./swaggerOption');
 
 // memuat plugin talk, memanggil class service NlpService, dan validator
-const talk = require('./api/talk');
-const NlpService = require('./services/nlp/NlpService');
-const TalkValidator = require('./validator/talk');
+
+// const talk = require('./api/talk');
+// const NlpService = require('./services/nlp/NlpService');
+// const TalkValidator = require('./validator/talk');
 
 const users = require('./api/users');
 const UserService = require('./services/postgres/UsersService');
@@ -30,12 +31,17 @@ const TokenManager = require('./tokenize/TokenManager');
 const AuthenticationsValidator = require('./validator/authentications');
 const AuthenticationError = require('./exceptions/AuthenticationError');
 
+const ml = require('./api/ML');
+const MlValidator = require('./validator/ml');
+
+const url = process.env.ML_API;
+
 // Direktori model
-const botDir = `${__dirname}/bot`;
+// const botDir = `${__dirname}/bot`;
 
 (async () => {
   // membuat instance dari Class NlpService dengan parameter direktori model (botDir)
-  const nlpService = new NlpService(botDir);
+//  const nlpService = new NlpService(botDir);
   const userService = new UserService();
   const authenticationService = new AuthenticationService();
 
@@ -107,13 +113,14 @@ const botDir = `${__dirname}/bot`;
 
   // Mendaftarkan custom plugin, yaitu talk dengan option service, dan validator
   await server.register([
-    {
+    /**    {
       plugin: talk,
       options: {
         service: nlpService,
         validator: TalkValidator,
       },
     },
+    */
     {
       plugin: users,
       options: {
@@ -130,9 +137,17 @@ const botDir = `${__dirname}/bot`;
         validator: AuthenticationsValidator,
       },
     },
+    {
+      plugin: ml,
+      options: {
+        validator: MlValidator,
+        url,
+      },
+    },
   ]);
 
   // Server dimulai
+  console.log(`using ${process.env.NODE_ENV} environment`);
   console.log(`server running on ${server.info.uri}`);
   await server.start();
 })();
