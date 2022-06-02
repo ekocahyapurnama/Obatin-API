@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "train": "node ./src/utils/train.js",
-    "start-dev": "nodemon ./src/server.js",
-    "start-prod": "pm2 start ./src/server.js --watch",
+    "start-dev": "NODE_ENV=development nodemon ./src/server.js",
+    "start-prod": "NODE_ENV=production pm2 start ./src/server.js --watch",
     "migrate": "npx sequelize-cli db:migrate"
   },
   "author": "obatin team",
@@ -22,6 +22,7 @@
     "joi": "^17.6.0",
     "joi-password": "^3.0.1",
     "nanoid": "^3.3.4",
+    "node-fetch": "^2.6.7",
     "node-nlp": "^4.24.0",
     "npm": "^8.10.0",
     "pg": "^8.7.3",
