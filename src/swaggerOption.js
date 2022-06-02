@@ -11,10 +11,12 @@ const swaggerOption = {
   grouping: 'tags',
   basePath: '/',
   tags: [
+    /**
     {
       name: 'talk',
       description: 'This talk tag',
     },
+    */
     {
       name: 'authentications',
       description: 'This authentication tag',
@@ -22,6 +24,10 @@ const swaggerOption = {
     {
       name: 'users',
       description: 'This users tag',
+    },
+    {
+      name: 'bot',
+      description: 'This bot tag',
     },
   ],
   payloadType: 'json',
