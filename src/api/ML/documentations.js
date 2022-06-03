@@ -19,7 +19,7 @@ const doc = {
           data: {
             response: Joi.object({
               label: Joi.string(),
-              namaobat: Joi.string(),
+              namaobat: Joi.string().allow(''),
               status: Joi.number(),
             }),
           },
