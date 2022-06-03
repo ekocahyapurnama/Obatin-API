@@ -59,13 +59,6 @@ const url = process.env.ML_API;
   // menambahkan extension sebelum server meresponse
   server.ext('onPreResponse', (request, h) => {
     const { response } = request;
-    if (response.isServer) {
-      return h.response({
-        status: 'Error',
-        message: 'An internal server error occurred',
-      }).code(500); // 500
-    }
-
     // jika response menidikasikan ClientError
     if (response instanceof ClientError) {
       if (response instanceof AuthenticationError) {
