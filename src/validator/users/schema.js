@@ -30,4 +30,11 @@ const userPayloadSchema = Joi.object({
   fullname: Joi.string().required(),
 });
 
-module.exports = userPayloadSchema;
+const userQuerySchema = Joi.object({
+  username: joiPassword
+    .string()
+    .noWhiteSpaces(),
+  email: Joi.string().email(),
+});
+
+module.exports = { userPayloadSchema, userQuerySchema };
