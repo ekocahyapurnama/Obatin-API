@@ -5,6 +5,7 @@ const { users } = require('../../models');
 
 const InvariantError = require('../../exceptions/InvariantError');
 const AuthenticationError = require('../../exceptions/AuthenticationError');
+const NotFoundError = require('../../exceptions/NotFoundError');
 
 class UsersService {
   constructor() {
@@ -22,6 +23,7 @@ class UsersService {
     const hashedPassword = await bcrypt.hash(password, 10); // enkripsi password dengan bycrypt
     const id = `user-${nanoid(12)}`;
     await this.verifyNewUserName(username);
+    await this.verifyNewUserEmail(email);
 
     try {
       result = await this._model.create({
@@ -41,9 +43,22 @@ class UsersService {
   }
 
   async verifyNewUserName(username) {
-    const result = await this._model.findOne({ where: { username } });
+    const result = await this._model.findOne({
+      where: { username },
+      attributes: ['id'],
+    });
     if (result) {
-      throw new InvariantError('username alredy used');
+      throw new InvariantError('username already used');
+    }
+  }
+
+  async verifyNewUserEmail(email) {
+    const result = await this._model.findOne({
+      where: { email },
+      attributes: ['id'],
+    });
+    if (result) {
+      throw new InvariantError('email already used');
     }
   }
 
@@ -65,6 +80,22 @@ class UsersService {
       throw new AuthenticationError('wrong credentials');
     }
     return id;
+  }
+
+  async getUser({ username, email }) {
+    const itsme = username || email;
+    // cari user berdasarkan username atau email
+    const result = await this._model.findOne({
+      where: {
+        [Op.or]: [{ username: itsme }, { email: itsme }],
+      },
+      attributes: ['id', 'username', 'fullname', 'email'],
+    });
+    if (!result) {
+      throw new NotFoundError(`user ${username || email} not found`);
+    }
+
+    return result;
   }
 }
 
