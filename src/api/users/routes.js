@@ -7,7 +7,7 @@ const routes = (handler, doc) => [
   },
   {
     method: 'GET',
-    path: '/users/profile',
+    path: '/users/profiles',
     handler: handler.getUserHandler,
     options: doc.getUserDoc,
   },
