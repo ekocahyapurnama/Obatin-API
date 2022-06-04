@@ -31,7 +31,7 @@ const TokenManager = require('./tokenize/TokenManager');
 const AuthenticationsValidator = require('./validator/authentications');
 const AuthenticationError = require('./exceptions/AuthenticationError');
 
-const ml = require('./api/ML');
+const ml = require('./api/ml');
 const MlValidator = require('./validator/ml');
 
 const url = process.env.ML_API;
