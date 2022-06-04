@@ -34,6 +34,35 @@ const doc = {
       },
     },
   },
+  getUserDoc: {
+    auth: 'obatin_api_jwt',
+    description: 'Get User',
+    notes: 'This endpoint is used to get user profile information based on user name or user email. You must attach email or username in the query parameter, after you fill it and send request to server, server will response 200 and data contains user profiles.',
+    tags: ['api', 'users'],
+    validate: {
+      query: Joi.object({
+        email: Joi.string().email(),
+        username: joiPassword
+          .string(),
+      }),
+    },
+    response: {
+      status: {
+        201: Joi.object({
+          status: Joi.string(),
+          message: Joi.string(),
+          data: {
+            id: Joi.string(),
+            username: Joi.string(),
+            email: Joi.string(),
+            fullname: Joi.string(),
+          },
+        }),
+        400: undefined,
+        401: undefined,
+      },
+    },
+  },
 };
 
 module.exports = doc;
