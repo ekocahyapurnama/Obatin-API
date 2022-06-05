@@ -47,9 +47,8 @@ const doc = {
     },
     response: {
       status: {
-        201: Joi.object({
+        200: Joi.object({
           status: Joi.string(),
-          message: Joi.string(),
           data: {
             id: Joi.string(),
             username: Joi.string(),
