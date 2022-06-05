@@ -28,9 +28,7 @@ class UserHandler {
 
     return {
       status: 'success',
-      data: {
-        user,
-      },
+      data: user,
     };
   }
 }
