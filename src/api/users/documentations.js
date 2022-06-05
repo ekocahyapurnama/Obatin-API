@@ -41,9 +41,8 @@ const doc = {
     tags: ['api', 'users'],
     validate: {
       query: Joi.object({
-        email: Joi.string().email(),
-        username: joiPassword
-          .string(),
+        email: Joi.string(),
+        username: Joi.string(),
       }),
     },
     response: {
