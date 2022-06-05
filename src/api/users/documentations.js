@@ -52,8 +52,8 @@ const doc = {
           data: {
             id: Joi.string(),
             username: Joi.string(),
-            email: Joi.string(),
             fullname: Joi.string(),
+            email: Joi.string(),
           },
         }),
         400: undefined,

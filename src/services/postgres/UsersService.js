@@ -8,8 +8,9 @@ const AuthenticationError = require('../../exceptions/AuthenticationError');
 const NotFoundError = require('../../exceptions/NotFoundError');
 
 class UsersService {
-  constructor() {
+  constructor(memcachedService) {
     this._model = users;
+    this._memcachedService = memcachedService;
   }
 
   // register
@@ -84,17 +85,20 @@ class UsersService {
 
   async getUser({ username, email }) {
     const itsme = username || email;
-    // cari user berdasarkan username atau email
-    const result = await this._model.findOne({
-      where: {
-        [Op.or]: [{ username: itsme }, { email: itsme }],
-      },
-      attributes: ['id', 'username', 'fullname', 'email'],
-    });
+    let result = await this._memcachedService.get(itsme);
     if (!result) {
-      throw new NotFoundError(`user ${username || email} not found`);
+      // cari user berdasarkan username atau email
+      result = await this._model.findOne({
+        where: {
+          [Op.or]: [{ username: itsme }, { email: itsme }],
+        },
+        attributes: ['id', 'username', 'fullname', 'email'],
+      });
+      await this._memcachedService.set(itsme, result);
+      if (!result) {
+        throw new NotFoundError(`user ${username || email} not found`);
+      }
     }
-
     return result;
   }
 }

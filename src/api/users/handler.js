@@ -24,22 +24,12 @@ class UserHandler {
   async getUserHandler({ query }) {
     this._validator.validateUserQuery(query);
 
-    const {
-      id,
-      username,
-      email,
-      fullname,
-    } = await this._service.getUser(query);
+    const user = await this._service.getUser(query);
 
     return {
       status: 'success',
       data: {
-        user: {
-          id,
-          username,
-          email,
-          fullname,
-        },
+        user,
       },
     };
   }

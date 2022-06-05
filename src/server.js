@@ -23,6 +23,7 @@ const swaggerOption = require('./swaggerOption');
 
 const users = require('./api/users');
 const UserService = require('./services/postgres/UsersService');
+const MemcachedService = require('./services/memchached/MemchachedService');
 const UserValidator = require('./validator/users');
 
 const authentications = require('./api/authentications');
@@ -41,8 +42,9 @@ const url = process.env.ML_API;
 
 (async () => {
   // membuat instance dari Class NlpService dengan parameter direktori model (botDir)
-//  const nlpService = new NlpService(botDir);
-  const userService = new UserService();
+  //  const nlpService = new NlpService(botDir);
+  const memcachedService = new MemcachedService();
+  const userService = new UserService(memcachedService);
   const authenticationService = new AuthenticationService();
 
   // Konfigurasi server
