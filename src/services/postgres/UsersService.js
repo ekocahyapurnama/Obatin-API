@@ -25,20 +25,15 @@ class UsersService {
     const id = `user-${nanoid(12)}`;
     await this.verifyNewUserName(username);
     await this.verifyNewUserEmail(email);
-
-    try {
-      result = await this._model.create({
-        id,
-        email,
-        password: hashedPassword,
-        username,
-        fullname,
-      }, { raw: true });
-      if (!result.id) {
-        throw new InvariantError('registration fail');
-      }
-    } catch (error) {
-      console.log(error);
+    result = await this._model.create({
+      id,
+      email,
+      password: hashedPassword,
+      username,
+      fullname,
+    }, { raw: true });
+    if (!result.id) {
+      throw new InvariantError('registration fail');
     }
     return result.id;
   }
@@ -75,7 +70,6 @@ class UsersService {
     }
 
     const { id, password: hashedPassword } = result;
-
     const match = await bcrypt.compare(password, hashedPassword);
     if (!match) {
       throw new AuthenticationError('wrong credentials');
@@ -93,11 +87,12 @@ class UsersService {
           [Op.or]: [{ username: itsme }, { email: itsme }],
         },
         attributes: ['id', 'username', 'fullname', 'email'],
+        raw: true,
       });
-      await this._memcachedService.set(itsme, result);
       if (!result) {
         throw new NotFoundError(`user ${username || email} not found`);
       }
+      await this._memcachedService.set(itsme, result);
     }
     return result;
   }

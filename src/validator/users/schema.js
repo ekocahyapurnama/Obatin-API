@@ -31,8 +31,7 @@ const userPayloadSchema = Joi.object({
 });
 
 const userQuerySchema = Joi.object({
-  username: joiPassword
-    .string(),
+  username: Joi.string(),
   email: Joi.string(),
 });
 
