@@ -41,11 +41,6 @@ const url = process.env.ML_API;
 // const botDir = `${__dirname}/bot`;
 
 (async () => {
-  const date = new Date().toLocaleString('en-US', {
-    timeZone: 'Asia/Jakarta',
-  });
-  const currentHour = date.slice(10, 20);
-
   // membuat instance dari Class NlpService dengan parameter direktori model (botDir)
   //  const nlpService = new NlpService(botDir);
   const memcachedService = new MemcachedService();
@@ -84,7 +79,7 @@ const url = process.env.ML_API;
       }).code(response.statusCode); // 400
     }
     if (response.isServer) {
-      console.log(`Error : ${response.message}`);
+      console.log(`Error message: ${response.message}`);
       return h.response({
         status: 'Server Error',
         message: 'An internal server error occurred',
@@ -159,10 +154,22 @@ const url = process.env.ML_API;
   ]);
 
   server.events.on('response', (request) => {
+    const date = Date().toLocaleString('en-US', {
+      timeZone: 'Asia/Jakarta',
+    });
+    const currentHour = date.slice(16, 24);
     console.log(`${currentHour} | ${request.response.statusCode} | ${request.info.remoteAddress} : ${request.method.toUpperCase()} ${request.path}`);
   });
 
   // Server dimulai
+  server.route({
+    method: 'GET',
+    path: '/',
+    handler: (request, h) => {
+
+        return 'Hello World!';
+    }
+});
   console.log(`using ${process.env.NODE_ENV} environment`);
   console.log(`server running on ${server.info.uri}`);
   await server.start();
