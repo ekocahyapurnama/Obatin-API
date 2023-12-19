@@ -3,3 +3,4 @@ network:
   forwarded_ports:
     - 8080/tcp
 
+entrypoint: npm run start
