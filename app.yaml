@@ -1,7 +1,4 @@
 runtime: nodejs20
-network:
-  forwarded_ports:
-    - 8080/tcp
 
 entrypoint: 
     - npm install
