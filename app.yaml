@@ -3,6 +3,6 @@ network:
   forwarded_ports:
     - 8080/tcp
 
-entrypoint: npm install
-entrypoint: npm run start
+entrypoint: [npm install, npm run start]
+
 
