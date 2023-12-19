@@ -1,3 +1,5 @@
 runtime: nodejs20
-forwarded_ports:
+network:
+  forwarded_ports:
     - 8080/tcp
+
