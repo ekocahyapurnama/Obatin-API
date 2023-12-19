@@ -8,7 +8,7 @@ steps:
   env:
     - 'HOST=${_HOST}'
     - 'PORT=${_PORT}'
-    - ACCESS_TOKEN_AGE==${_ACCESS_TOKEN_AGE}
+    - 'ACCESS_TOKEN_AGE==${_ACCESS_TOKEN_AGE}'
     - 'ACCESS_TOKEN_KEY==${_ACCESS_TOKEN_KEY}'
     - 'REFRESH_TOKEN_KEY==${_REFRESH_TOKEN_KEY}'
     
